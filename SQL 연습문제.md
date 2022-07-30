@@ -19,7 +19,7 @@ from (select constituency,
 where new.rk = 1
 ```
 
-1. 모든 나라의 인구수가 25000000보다 적은 대륙을 구하는 예시 (not in 사용)
+2. 모든 나라의 인구수가 25000000보다 적은 대륙을 구하는 예시 (not in 사용)
 
 ```sql
 select name, continent, population from world
@@ -28,11 +28,21 @@ where continent not in (select distinct continent
                         where population > 25000000)
 ```
 
-1. 프랑스와 이탈리아의 코로나 신규감연자수 구하는 예시 (서브쿼리 + window function 사용)
+3. 프랑스와 이탈리아의 코로나 신규감연자수 구하는 예시 (서브쿼리 + window function 사용)
 
 ```sql
 select name, date, 每天新增治愈人数, rank()over(partition by name order by 每天新增治愈人数 desc) rk 
 from (select name, date_format(whn, '%Y年%m月%d日') date, (recovered - lag(recovered, 1) over(partition by name order by whn)) 每天新增治愈人数 
       from covid where name in ('France', 'Italy')) re
 order by rk
+```
+
+
+
+4. 查询2020年饿了么平台上每个门店GMV最高那天的日期和GMV （window function）
+```sql
+select 门店名称, 日期, GMV 
+from (select 门店名称, 日期, row_number() over(partition by 门店名称 order by GMV desc) r, GMV 
+      from ddm.shop where substring(日期,1,4) = '2020' and 平台='eleme') a 
+where a.r = 1
 ```
