@@ -69,7 +69,7 @@ from user_profile
 group by age_cut 
 ```
 
-7. 다음날 리텐션 
+7. 다음날 리텐션 구하기 
 ```sql
 SELECT 
 COUNT(DISTINCT q2.device_id, q2.date) / COUNT(DISTINCT q1.device_id, q1.date) AS avg_ret
