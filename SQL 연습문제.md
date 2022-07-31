@@ -77,3 +77,11 @@ FROM question_practice_detail q1
 LEFT JOIN question_practice_detail q2
 on q1.device_id = q2.device_id and datediff(q2.date, q1.date) = 1
 ```
+
+8. 现在运营想要统计每个性别的用户分别有多少参赛者，请取出相应结果
+```sql
+select 
+substring_index(profile, ',', -1) gender, count(device_id)
+from user_submit
+group by gender
+```
