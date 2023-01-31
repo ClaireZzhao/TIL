@@ -1,5 +1,6 @@
 # AARRR
 
+
 AARRR은 `허무 지표(Vanity Metrics, 총 방문수 등)`에 시간을 쏟기 보단 `실행 지표(Actionable Metrics)`에 집중함으로 개선의 방향을 잡고 최적화할 수 있도록 돕는 분석 프레임워크
 
 그로스해킹의 대표적인 분석 프레임워크로 AARRR을 많이 사용합니다.
